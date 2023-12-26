@@ -21,4 +21,35 @@ public class CompteService {
 
         return this.Repo.save(compte);
     }
+
+
+    public Compte updateCompte(String id, Compte updatedCompte)
+    {
+        Compte existingCompte = Repo.findById(id).orElse(null);
+        existingCompte.getRole();
+        if (existingCompte != null) {
+            // Update fields of the existingCompte with updatedCompte data
+            existingCompte.setEmail(updatedCompte.getEmail());
+            existingCompte.setRole(updatedCompte.getRole());
+            String encryptedPassword = bCryptPasswordEncoder.encode(existingCompte.getPassword());
+            existingCompte.setPassword(encryptedPassword);
+
+
+            return Repo.save(existingCompte);
+        } else {
+
+            return null;
+        }
+    }
+    public Compte getCompteById(String id)
+    {
+        return Repo.findById(id).orElse(null);
+    }
+
+
+
+
+
+
+
 }

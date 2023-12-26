@@ -18,11 +18,11 @@ public class Enseignant {
     private String Id ;
     private String nom;
     private String prenom;
-    private String email;
     private String genre;
+    private String categorie;
     private String dateNaissance;
     private String dateEntrer;
     private Boolean activated;
-
+    public   Adresse adresse;
 
 }
