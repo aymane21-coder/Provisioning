@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CompteService {
     @Autowired
@@ -46,7 +48,12 @@ public class CompteService {
         return Repo.findById(id).orElse(null);
     }
 
-
+    public Compte loadUserByEmail(String Email) {
+        return Repo.findCompteByEmail(Email);
+    }
+    public List<Compte> getEnseignantAccounts(String role) {
+        return Repo.findByRole(role);
+    }
 
 
 

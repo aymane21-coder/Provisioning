@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
+@RequestMapping("/compte")
 @RestController
 public class CompteController {
     String UserID;
@@ -54,6 +54,7 @@ public class CompteController {
     @PutMapping("/Updatedonne/{id}")
     public ResponseEntity<?> updateEnseignant(@PathVariable("id") String enseignantId, @RequestBody Enseignant updatedEnseignant) {
         try {
+
             String updateUrl = enseignantUrl + "/update/"+enseignantId; // Assuming the update endpoint follows this structure
 
             RestTemplate restTemplate = new RestTemplate();
