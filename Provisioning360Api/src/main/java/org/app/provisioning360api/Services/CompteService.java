@@ -35,8 +35,8 @@ public class CompteService {
             existingCompte.setRole(updatedCompte.getRole());
             String encryptedPassword = bCryptPasswordEncoder.encode(existingCompte.getPassword());
             existingCompte.setPassword(encryptedPassword);
-
-
+            existingCompte.setCoursesPurchased(updatedCompte.getCoursesPurchased());
+            existingCompte.setTocken(updatedCompte.getTocken());
             return Repo.save(existingCompte);
         } else {
 
@@ -47,7 +47,10 @@ public class CompteService {
     {
         return Repo.findById(id).orElse(null);
     }
-
+    public Compte getCompteByEmail(String email)
+    {
+        return Repo.findCompteByEmail(email);
+    }
     public Compte loadUserByEmail(String Email) {
         return Repo.findCompteByEmail(Email);
     }
@@ -56,6 +59,15 @@ public class CompteService {
     }
 
 
+    // Method to find a Compte by ID
+    public Compte findById(String id) {
+        return Repo.findById(id).orElse(null);
+    }
+
+    // Method to fetch all Comptes
+    public List<Compte> findAll() {
+        return Repo.findAll();
+    }
 
 
 

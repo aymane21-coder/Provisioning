@@ -2,7 +2,7 @@ package org.app.provisioning360api.Security;
 import org.app.provisioning360api.Entitie.Compte;
 import org.app.provisioning360api.Services.CompteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

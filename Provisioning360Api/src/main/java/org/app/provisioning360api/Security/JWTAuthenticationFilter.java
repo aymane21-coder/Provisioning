@@ -50,7 +50,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         User user=(User)authResult.getPrincipal();
 
 
-
+          
             String role = authResult.getAuthorities().iterator().next().getAuthority();
 
 

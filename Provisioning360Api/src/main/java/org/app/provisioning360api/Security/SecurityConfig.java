@@ -21,6 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+   /* @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeRequests().antMatchers("/").permitAll();
+    }*/
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
@@ -30,11 +34,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/login/**","/register/**").permitAll();
-        http.authorizeRequests().antMatchers("/compte/**","/enseignant/**").hasAuthority("ADMIN");
+        http.authorizeRequests().antMatchers("/login/**","/register/**","/AddEnseignant","/updateCompte/**","/Updatedonne/**","/addetudiant").permitAll();
+        http.authorizeRequests().antMatchers("/compte/**","/enseignant/**").hasAuthority("admin");
+        http.authorizeRequests().antMatchers("/compte/**","/enseignant/**","/ajoutercours").hasAuthority("enseignant");
+        http.authorizeRequests().antMatchers("/compte/**","/enseignant/**","/acheterCour/**").hasAuthority("etudiant");
         http.authorizeRequests().anyRequest().authenticated();
 
         http.addFilter(new JWTAuthenticationFilter(authenticationManager()));
-       // http.addFilterBefore(new JWTAuthorizationFiler(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JWTAuthorizationFiler(), UsernamePasswordAuthenticationFilter.class);
     }
+
+
+
 }
